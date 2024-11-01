@@ -4,7 +4,7 @@
 public class Player {
 
     private String name;
-    private Hand hand;
+    protected Hand hand;
 
     /**
      * Constructs a player with an empty hand.

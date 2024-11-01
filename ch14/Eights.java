@@ -6,7 +6,7 @@ import java.util.Scanner;
  */
 public class Eights {
 
-    private Player one;
+    private BetterPlayer one;
     private Player two;
     private Hand drawPile;
     private Hand discardPile;
@@ -20,7 +20,7 @@ public class Eights {
         deck.shuffle();
 
         // deal cards to each player
-        one = new Player("Allen");
+        one = new BetterPlayer("Allen");
         deck.deal(one.getHand(), 5);
         two = new Player("Chris");
         deck.deal(two.getHand(), 5);
