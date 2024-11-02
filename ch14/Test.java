@@ -15,6 +15,10 @@ public class Test {
         deck.dealAll(drawPile);
         System.out.printf("Draw Pile has %d cards.\n",
                           drawPile.size());
+
+        BetterPlayer betterPlayer = new BetterPlayer("player");
+        Eights eights = new Eights();
+        betterPlayer.play(eights, null);
     }
 
 }
