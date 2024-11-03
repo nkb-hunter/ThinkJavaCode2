@@ -11,16 +11,15 @@ public class Conway {
     private GridCanvas grid;
 
     /**
-     * Creates a grid with two Blinkers.
+     * Creates a grid with a glider.
      */
     public Conway() {
         grid = new GridCanvas(5, 10, 20);
         grid.turnOn(2, 1);
-        grid.turnOn(2, 2);
+        grid.turnOn(3, 2);
+        grid.turnOn(3, 3);
         grid.turnOn(2, 3);
-        grid.turnOn(1, 7);
-        grid.turnOn(2, 7);
-        grid.turnOn(3, 7);
+        grid.turnOn(1, 3);
         System.out.println(grid.countOn());
     }
 
