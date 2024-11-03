@@ -18,7 +18,23 @@ public class Test {
 
         BetterPlayer betterPlayer = new BetterPlayer("player");
         Eights eights = new Eights();
-        betterPlayer.play(eights, null);
+        Card card = new Card(7, 2);
+        betterPlayer.play(eights, card);
+
+        System.out.println("Testing EightsCard");
+
+        EightsCard ec1 = new EightsCard(7, 2);
+        EightsCard ec2 = new EightsCard(7, 3);
+        EightsCard ec3 = new EightsCard(8, 1);
+        EightsCard ec4 = new EightsCard(2, 0); // doesn't match anything
+        System.out.println(ec1.match(ec4)); // should be false
+        System.out.println(ec2.match(ec3)); // should be true
+        System.out.println(ec1.match(ec2)); // should be true
+
+        System.out.println(ec3.scoreCard()); // should be -20
+
+        EightsHand eHand = new EightsHand("eightsHand");
+        System.out.println(eHand.scoreHand());
     }
 
 }

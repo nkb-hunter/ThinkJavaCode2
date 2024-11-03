@@ -21,6 +21,7 @@ public class Conway {
         grid.turnOn(1, 7);
         grid.turnOn(2, 7);
         grid.turnOn(3, 7);
+        System.out.println(grid.countOn());
     }
 
     /**

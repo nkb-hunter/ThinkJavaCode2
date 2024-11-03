@@ -93,6 +93,18 @@ public class GridCanvas extends Canvas {
         return 0;
     }
 
+    public int countOn(){
+        int numOn = 0;
+        for(int row = 0; row < array.length; row++){
+            for(int col = 0; col < array[0].length; col++){
+                if(test(row, col) == 1){
+                    numOn++;
+                }
+            }
+        }
+        return numOn;
+    }
+
     /**
      * Draws the grid, cell by cell.
      * 

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -6,10 +7,9 @@ import java.util.Scanner;
  */
 public class Eights {
 
-    private BetterPlayer one;
-    private Player two;
-    private Hand drawPile;
-    private Hand discardPile;
+    private ArrayList<Player> players = new ArrayList<Player>();
+    private EightsHand drawPile;
+    private EightsHand discardPile;
     private Scanner in;
 
     /**
@@ -20,17 +20,22 @@ public class Eights {
         deck.shuffle();
 
         // deal cards to each player
-        one = new BetterPlayer("Allen");
-        deck.deal(one.getHand(), 5);
-        two = new Player("Chris");
-        deck.deal(two.getHand(), 5);
+        BetterPlayer one = new BetterPlayer("Allen");
+        Player two = new Player("Chris");
+        Player three = new Player("Jade");
+        players.add(one);
+        players.add(two);
+        players.add(three);
+        for(Player player : players){
+            deck.deal(player.getHand(), 5);
+        }
 
         // turn one card face up
-        discardPile = new Hand("Discards");
+        discardPile = new EightsHand("Discards");
         deck.deal(discardPile, 1);
 
         // put the rest of the deck face down
-        drawPile = new Hand("Draw pile");
+        drawPile = new EightsHand("Draw pile");
         deck.dealAll(drawPile);
 
         // create the scanner we'll use to wait for the user
@@ -38,10 +43,15 @@ public class Eights {
     }
 
     /**
-     * Returns true if either hand is empty.
+     * Returns true if any hand is empty.
      */
     public boolean isDone() {
-        return one.getHand().isEmpty() || two.getHand().isEmpty();
+        for (Player player : players){
+            if(player.getHand().isEmpty()){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -75,23 +85,36 @@ public class Eights {
      * Switches players.
      */
     public Player nextPlayer(Player current) {
-        if (current == one) {
-            return two;
-        } else {
-            return one;
+        // update for ArrayList
+        Player next = players.get(0); // default first player, and stays this way if we are on the last player
+        for (int i = 0; i < players.size(); i++){
+            if(players.get(i) == current){
+                if (i != players.size()-1){ // if it's not the last player
+                    next = players.get(i+1);
+                }
+            }
         }
+        return next;
+        // original logic for two players
+        // if (current == one) {
+        //     return two;
+        // } else {
+        //     return one;
+        // }
     }
 
     /**
      * Displays the state of the game.
      */
     public void displayState() {
-        one.display();
-        two.display();
+        for(Player player : players){
+            player.display();
+        }
         discardPile.display();
         System.out.print("Draw pile: ");
         System.out.println(drawPile.size() + " cards");
-        in.nextLine();
+        // comment out for 100 game simulation
+     //   in.nextLine();
     }
 
     /**
@@ -109,8 +132,9 @@ public class Eights {
     /**
      * Plays the game.
      */
-    public void playGame() {
-        Player player = one;
+    public Player playGame() {
+        Player player = players.get(0);
+        Player isWinner = player;
 
         // keep playing until there's a winner
         while (!isDone()) {
@@ -120,16 +144,40 @@ public class Eights {
         }
 
         // display the final score
-        one.displayScore();
-        two.displayScore();
+        for(Player pl : players){
+            pl.displayScore();
+            if (pl.score() == 0){
+                isWinner = pl;
+            }
+        }
+        return isWinner;
     }
 
     /**
      * Creates the game and runs it.
      */
     public static void main(String[] args) {
-        Eights game = new Eights();
-        game.playGame();
+        Eights eights = new Eights(); // just to get number of players
+        int numPlayers = eights.players.size();
+        ArrayList<Integer> scores = new ArrayList<Integer>(numPlayers);
+        for(int i = 0 ; i < numPlayers; i++){
+            scores.add(0);
+        }
+        for(int x = 0; x < 100; x++){
+            System.out.println("Iteration: " + x);
+            Eights game = new Eights();
+            Player winner = game.playGame();
+            int i = 0;
+            for (Player player : game.players){
+                if(winner.equals(player)){
+                    scores.set(i, scores.get(i)+1);
+                }
+                i++;
+            }
+        }
+        for(int i = 0; i < scores.size(); i++){
+            System.out.println("Player " + (i + 1) + " won " + scores.get(i));
+        }
     }
 
 }
