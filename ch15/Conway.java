@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 
 /**
@@ -21,6 +26,31 @@ public class Conway {
         grid.turnOn(2, 3);
         grid.turnOn(1, 3);
         System.out.println(grid.countOn());
+    }
+
+    public Conway(String path) {
+        File file = new File(path);
+        try{
+            Scanner scan = new Scanner(file);
+            ArrayList<String> board = new ArrayList<String>();
+            scan.nextLine(); // skip first line
+            while(scan.hasNextLine()){
+                board.add(scan.nextLine());
+            }
+            grid = new GridCanvas(board.size(), board.get(0).length(), 20);
+            for(int i = 0; i < board.size(); i++){
+                for(int j = 0; j < board.get(0).length(); j++){
+                    if(board.get(i).charAt(j) == 'O'){
+                        grid.turnOn(i,j);
+                    }
+                }
+            }
+
+        }
+        catch(FileNotFoundException e){
+            e.getStackTrace();
+            System.exit(1);
+        }
     }
 
     /**
@@ -136,7 +166,8 @@ public class Conway {
      */
     public static void main(String[] args) {
         String title = "Conway's Game of Life";
-        Conway game = new Conway();
+        // Conway game = new Conway();
+        Conway game = new Conway("glider.cells");
         JFrame frame = new JFrame(title);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
