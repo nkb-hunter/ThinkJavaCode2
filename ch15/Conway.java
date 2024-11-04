@@ -35,14 +35,14 @@ public class Conway {
             scan.nextLine(); // skip first line
             int dotIndex = path.lastIndexOf('.');
             String extension = path.substring(dotIndex + 1);
-            while(scan.hasNextLine() && extension != "rle"){
+            while(scan.hasNextLine() && !extension.equals("rle")){
                 board.add(scan.nextLine());
             }
             if(extension.equals("rle")){
                 String dimensions = scan.nextLine(); // x and y line
                 String[] lines = dimensions.split(",");
                 int x = Integer.parseInt(lines[0].split("\\s+")[2]);
-                int y = Integer.parseInt(lines[1].split("\\s+")[2]);
+                int y = Integer.parseInt(lines[1].split("\\s+")[3]);
                 
                 String encoding = scan.nextLine();
                 String row = "";
@@ -53,7 +53,7 @@ public class Conway {
                         count = Integer.parseInt(String.valueOf(encoding.charAt(i)));
                     }
                     catch(NumberFormatException e){
-                        count = 1;
+                        //count = 1;
                     }
                     if(encoding.charAt(i) == '$'){
                         if(row.length() < x){
@@ -62,17 +62,38 @@ public class Conway {
                             }
                         }
                         board.add(row);
+                        System.out.println(row);
                         row = "";
                     }
                     else if(encoding.charAt(i) == 'b'){
                         for(int n = 0; n < count; n++){
                             row += ".";
                         }
+                        count = 1;
                     }
                     else if(encoding.charAt(i) == 'o'){
                         for(int n = 0; n < count; n++){
                             row += "O";
                         }
+                        count = 1;
+                    }
+                }
+                if(row.length() < x){
+                    for(int j = row.length(); j < x; j++){
+                        row += ".";
+                    }
+                }
+                board.add(row);
+                System.out.println(row);
+                if(board.size() < y){
+                    row = "";
+                    for(int n = 0; n < x; n++){
+                        row += ".";
+                    }
+                    for(int j = board.size(); j <y; j++){
+                        board.add(row);
+                        
+                        System.out.println(row);
                     }
                 }
             }
@@ -204,7 +225,8 @@ public class Conway {
      */
     public static void main(String[] args) {
         String title = "Conway's Game of Life";
-        Conway game = new Conway();
+        //Conway game = new Conway();
+        Conway game = new Conway("glider.rle");
         JFrame frame = new JFrame(title);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
