@@ -40,8 +40,10 @@ public class Conway {
             }
             if(extension.equals("rle")){
                 String dimensions = scan.nextLine(); // x and y line
-                String encoding = scan.nextLine();
                 String[] lines = dimensions.split(',');
+                int x = Integer.parseInt(lines[0].split("\\s+")[2]);
+                int y = Integer.parseInt(lines[1].split("\\s+")[2]);
+                String encoding = scan.nextLine();
                 for(int i = 0 ; i < encoding.length; i++){
                     if(encoding.charAt(i) == '$'){
                         
