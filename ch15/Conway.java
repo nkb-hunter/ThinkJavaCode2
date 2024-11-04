@@ -44,11 +44,17 @@ public class Conway {
                 int x = Integer.parseInt(lines[0].split("\\s+")[2]);
                 int y = Integer.parseInt(lines[1].split("\\s+")[2]);
                 
-                
                 String encoding = scan.nextLine();
                 String row = "";
+                int count = 1;
                 for(int i = 0 ; i < encoding.length; i++){
                     
+                    try{
+                        count = Integer.parseInt(encoding.charAt(i));
+                    }
+                    catch{
+                        count = 1;
+                    }
                     if(encoding.charAt(i) == '$'){
                         if(row.length < x){
                             for(int i = row.length; i < x; i++){
@@ -56,6 +62,13 @@ public class Conway {
                             }
                         }
                         board.add(row);
+                        row = "";
+                    }
+                    else if(encoding.charAt(i) == 'b'){
+                        row.add(".");
+                    }
+                    else if(encoding.charAt(i) == 'o'){
+                        row.add("O");
                     }
                 }
             }
