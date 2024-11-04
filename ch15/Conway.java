@@ -1,4 +1,8 @@
 import javax.swing.JFrame;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.FileNotFoundException;
 
 /**
  * Conway's Game of Life.
@@ -21,6 +25,30 @@ public class Conway {
         grid.turnOn(2, 3);
         grid.turnOn(1, 3);
         System.out.println(grid.countOn());
+    }
+
+    public Conway(String path) {
+        File file = new File(path);
+        try{
+            Scanner scan = new Scanner(file);
+            ArrayList<String> board = new ArrayList<String>();
+            scan.nextLine(); // skip first line
+            while(scan.hasNextLine()){
+                board.add(scan.nextLine());
+            }
+            grid = new GridCanvas(board.size(), board.get(0).length(), 20);
+            for(int i = 0; i<board.size(); i++){
+                for(int j = 0; j<board.get(0).length(); j++){
+                    if(board.get(i).charAt(j) == 'O'){
+                        grid.turnOn(i,j);
+                    }
+                }
+            }
+        }
+        catch(FileNotFoundException e){
+            e.getStackTrace();
+            System.exit(1);
+        }
     }
 
     /**
