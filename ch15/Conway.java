@@ -39,10 +39,13 @@ public class Conway {
                 board.add(scan.nextLine());
             }
             if(extension.equals("rle")){
-                scan.nextLine(); // skip x and y line
+                String dimensions = scan.nextLine(); // x and y line
                 String encoding = scan.nextLine();
+                String[] lines = dimensions.split(',');
                 for(int i = 0 ; i < encoding.length; i++){
-                    
+                    if(encoding.charAt(i) == '$'){
+                        
+                    }
                 }
             }
             grid = new GridCanvas(board.size(), board.get(0).length(), 20);
