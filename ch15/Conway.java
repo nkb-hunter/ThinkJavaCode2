@@ -43,10 +43,19 @@ public class Conway {
                 String[] lines = dimensions.split(',');
                 int x = Integer.parseInt(lines[0].split("\\s+")[2]);
                 int y = Integer.parseInt(lines[1].split("\\s+")[2]);
+                
+                
                 String encoding = scan.nextLine();
+                String row = "";
                 for(int i = 0 ; i < encoding.length; i++){
+                    
                     if(encoding.charAt(i) == '$'){
-                        
+                        if(row.length < x){
+                            for(int i = row.length; i < x; i++){
+                                row.add(".");
+                            }
+                        }
+                        board.add(row);
                     }
                 }
             }
