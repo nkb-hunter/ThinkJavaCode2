@@ -33,8 +33,13 @@ public class Conway {
             Scanner scan = new Scanner(file);
             ArrayList<String> board = new ArrayList<String>();
             scan.nextLine(); // skip first line
-            while(scan.hasNextLine()){
+            int dotIndex = path.lastIndexOf('.');
+            String extension = path.substring(dotIndex + 1);
+            while(scan.hasNextLine() && extension != "rle"){
                 board.add(scan.nextLine());
+            }
+            if(extension == "rle"){
+                
             }
             grid = new GridCanvas(board.size(), board.get(0).length(), 20);
             for(int i = 0; i<board.size(); i++){
