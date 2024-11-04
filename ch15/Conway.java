@@ -40,35 +40,39 @@ public class Conway {
             }
             if(extension.equals("rle")){
                 String dimensions = scan.nextLine(); // x and y line
-                String[] lines = dimensions.split(',');
+                String[] lines = dimensions.split(",");
                 int x = Integer.parseInt(lines[0].split("\\s+")[2]);
                 int y = Integer.parseInt(lines[1].split("\\s+")[2]);
                 
                 String encoding = scan.nextLine();
                 String row = "";
                 int count = 1;
-                for(int i = 0 ; i < encoding.length; i++){
+                for(int i = 0 ; i < encoding.length(); i++){
                     
                     try{
-                        count = Integer.parseInt(encoding.charAt(i));
+                        count = Integer.parseInt(String.valueOf(encoding.charAt(i)));
                     }
-                    catch{
+                    catch(NumberFormatException e){
                         count = 1;
                     }
                     if(encoding.charAt(i) == '$'){
-                        if(row.length < x){
-                            for(int i = row.length; i < x; i++){
-                                row.add(".");
+                        if(row.length() < x){
+                            for(int j = row.length(); j < x; j++){
+                                row += ".";
                             }
                         }
                         board.add(row);
                         row = "";
                     }
                     else if(encoding.charAt(i) == 'b'){
-                        row.add(".");
+                        for(int n = 0; n < count; n++){
+                            row += ".";
+                        }
                     }
                     else if(encoding.charAt(i) == 'o'){
-                        row.add("O");
+                        for(int n = 0; n < count; n++){
+                            row += "O";
+                        }
                     }
                 }
             }
