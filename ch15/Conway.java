@@ -38,8 +38,12 @@ public class Conway {
             while(scan.hasNextLine() && extension != "rle"){
                 board.add(scan.nextLine());
             }
-            if(extension == "rle"){
-                
+            if(extension.equals("rle")){
+                scan.nextLine(); // skip x and y line
+                String encoding = scan.nextLine();
+                for(int i = 0 ; i < encoding.length; i++){
+                    
+                }
             }
             grid = new GridCanvas(board.size(), board.get(0).length(), 20);
             for(int i = 0; i<board.size(); i++){
