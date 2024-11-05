@@ -1,3 +1,4 @@
+import javax.swing.JFrame;
 
 public abstract class Automaton {
     protected GridCanvas grid;
