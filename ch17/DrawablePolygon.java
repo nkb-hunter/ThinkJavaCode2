@@ -21,7 +21,7 @@ public class DrawablePolygon extends Polygon implements Actor {
      * Returns a string of point coordinates and color.
      */
     public String toString(){
-        String result = "A " + color +" polygon with the following points: ";
+        String result = "A polygon with the following points: ";
         for(int i = 0; i < xpoints.length; i++){
             result += "(" + xpoints[i] + ", " + ypoints[i] + ")";
         }
