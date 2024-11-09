@@ -35,6 +35,14 @@ public class Sprite implements Actor, KeyListener {
     }
 
     @Override
+    public void collides(Actor a){
+        if(xpos == a.getx() && ypos == a.gety()){
+            a.setdx(0);
+            a.setdy(0);
+        }
+    }
+
+    @Override
     public void draw(Graphics g) {
         g.drawImage(image, xpos, ypos, null);
     }
@@ -80,6 +88,42 @@ public class Sprite implements Actor, KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
         // do nothing
+    }
+
+    public static void main(String[] args) {
+        Sprite sprite = new Sprite("blah", 0, 0);
+        MovingPolygon mp = new MovingPolygon(5, null);
+        sprite.collides(mp);
+    }
+
+    @Override
+    public int getx() {
+        return xpos;
+    }
+
+    @Override
+    public int gety() {
+        return ypos;
+    }
+
+    @Override
+    public int getdx() {
+        return dx;
+    }
+
+    @Override
+    public int getdy() {
+        return dy;
+    }
+
+    @Override
+    public void setdx(int n) {
+        dx = n;
+    }
+
+    @Override
+    public void setdy(int n) {
+        dy = n;
     }
 
 }

@@ -17,6 +17,8 @@ public class DrawablePolygon extends Polygon implements Actor {
         color = Color.GRAY;
     }
 
+    public void collides(Actor a){}
+
     /**
      * Returns a string of point coordinates and color.
      */
@@ -56,6 +58,38 @@ public class DrawablePolygon extends Polygon implements Actor {
         p.addPoint(143, 110);
         p.color = Color.GREEN;
         System.out.println(p);
+    }
+
+    @Override
+    public int getx() {
+        return this.xpoints[0];
+    }
+
+    @Override
+    public int gety() {
+        return this.ypoints[0];
+    }
+
+    @Override
+    public int getdx() {
+        return 0;
+    }
+
+    @Override
+    public int getdy() {
+        return 0;
+    }
+
+    @Override
+    public void setdx(int n) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setdx'");
+    }
+
+    @Override
+    public void setdy(int n) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setdy'");
     }
 
 }

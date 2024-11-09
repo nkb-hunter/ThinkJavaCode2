@@ -18,7 +18,9 @@ public class VideoGame implements ActionListener {
     public VideoGame() {
         Sprite sprite = new Sprite("face-smile.png", 25, 150);
         drawing = new Drawing(800, 600);
+        MovingPolygon mp = new MovingPolygon(5, drawing);
         drawing.add(sprite);
+        drawing.add(mp);
         drawing.addKeyListener(sprite);
         drawing.setFocusable(true);
 

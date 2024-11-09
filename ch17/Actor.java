@@ -4,7 +4,6 @@ import java.awt.Graphics;
  * Graphical simulation element.
  */
 public interface Actor {
-
     /**
      * Draws the simulation element in the context.
      * 
@@ -17,4 +16,18 @@ public interface Actor {
      */
     void step();
 
+
+    void collides(Actor a);
+
+    int getx();
+
+    int gety();
+
+    int getdx();
+
+    int getdy();
+
+    void setdx(int n);
+
+    void setdy(int n);
 }
